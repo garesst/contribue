@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /Contribue
+
+# Redirigir todas las solicitudes a index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ /Contribue/index.php [L]
