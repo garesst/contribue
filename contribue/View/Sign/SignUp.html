@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/www_public/css/output.css" rel="stylesheet">
+    <title>Sign Up</title>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@22.0.2/build/css/intlTelInput.css">
+</head>
+<body>
+<div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
+    <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+        <div class="lg:w-1/2 xl:w-7/12 p-6 sm:p-5">
+            <div>
+                <img src="/www_public/img/logo_contribue.svg"
+                     class="w-40 mx-auto" />
+            </div>
+            <div class="mt-4 flex flex-col items-center">
+                <h1 class="text-2xl xl:text-3xl font-extrabold">
+                    Sign up
+                </h1>
+                <form action="api/users/0.0.1/register" method="post" class="w-full mt-12">
+
+                    <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                        <div class="grid grid-cols-2 gap-x-4">
+                            <div class="relative">
+                                <input required autocomplete="off" id="name_user" name="name_user" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 pl-2" placeholder="Nombres" />
+                                <label for="name_user" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Nombres</label>
+                            </div>
+                            <div class="relative">
+                                <input required autocomplete="off" id="lastname_user" name="lastname_user" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 pl-2" placeholder="Apellidos" />
+                                <label for="lastname_user" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Apellidos</label>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <input required autocomplete="off" id="email_user" name="email_user" type="email" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 pl-2" placeholder="Correo Electronico" />
+                            <label for="email_user" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Correo Electronico</label>
+                        </div>
+                        <div class="relative">
+                            <input required autocomplete="off" id="workspace_user" name="workspace_user" type="tel" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 pl-2" placeholder="Nombre de Workspace" />
+                            <label for="workspace_user" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Nombre de Workspace</label>
+                        </div>
+                        <div class="grid grid-cols-2 gap-x-4">
+                            <div class="relative">
+                                <input required type="tel" id="tel_user" name="tel_user" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 pl-2" placeholder="Telefono">
+                            </div>
+                            <div class="relative">
+                                <select required id="country_user" name="country_user" title="country" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 pl-2">
+                                    <option value="" selected disabled>Seleccione un país</option>
+                                    <option value="AR" class="flag-option">Argentina</option>
+                                    <option value="BO" class="flag-option">Bolivia</option>
+                                    <option value="CL" class="flag-option">Chile</option>
+                                    <option value="CO" class="flag-option">Colombia</option>
+                                    <option value="CR" class="flag-option">Costa Rica</option>
+                                    <option value="CU" class="flag-option">Cuba</option>
+                                    <option value="DO" class="flag-option">República Dominicana</option>
+                                    <option value="EC" class="flag-option">Ecuador</option>
+                                    <option value="SV" class="flag-option">El Salvador</option>
+                                    <option value="ES" class="flag-option">España</option>
+                                    <option value="GT" class="flag-option">Guatemala</option>
+                                    <option value="HN" class="flag-option">Honduras</option>
+                                    <option value="MX" class="flag-option">México</option>
+                                    <option value="NI" class="flag-option">Nicaragua</option>
+                                    <option value="PA" class="flag-option">Panamá</option>
+                                    <option value="PY" class="flag-option">Paraguay</option>
+                                    <option value="PE" class="flag-option">Perú</option>
+                                    <option value="PR" class="flag-option">Puerto Rico</option>
+                                    <option value="UY" class="flag-option">Uruguay</option>
+                                    <option value="VE" class="flag-option">Venezuela</option>
+                                </select>
+                                <label for="country_user" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Seleccion su pais</label>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-x-4">
+                            <div class="relative">
+                                <input type="password" id="password" name="password" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 pl-2" placeholder="" required minlength="8" />
+                                <label for="password" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Contraseña</label>
+                            </div>
+                            <div class="relative">
+                                <input type="password" id="repeat_password" name="repeat_password" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 pl-2" placeholder="" required pattern="^.{8,}$" oninput="pswCheck(this)" />
+                                <label for="repeat_password" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Repita Contraseña</label>
+                            </div>
+                        </div>
+
+                        <button
+                                class="mt-5 tracking-wide font-semibold bg-cyan-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                            <svg class="w-6 h-6 -ml-2" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                <circle cx="8.5" cy="7" r="4" />
+                                <path d="M20 8v6M23 11h-6" />
+                            </svg>
+                            <span class="ml-3">
+                                Registrar
+                            </span>
+                        </button>
+                        <p class="mt-6 text-xs text-gray-600 text-center">
+                            Acepto cumplir con los
+                            <a href="#" class="border-b border-gray-500 border-dotted">
+                                Terminos de servicio
+                            </a>
+                            de Contribue y su
+                            <a href="#" class="border-b border-gray-500 border-dotted">
+                                Politica de privacidad
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="flex-1 bg-indigo-100 text-center hidden lg:flex">
+            <div class="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
+                 style="background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@22.0.2/build/js/intlTelInput.min.js"></script>
+<script>
+    const input = document.querySelector("#tel_user");
+    window.intlTelInput(input, {
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@22.0.2/build/js/utils.js",
+        hiddenInput: () => ({ phone: "tel_ful_user", country: "cod_tel_user" }),
+        initialCountry: "auto",
+        geoIpLookup: function(success, failure) {
+            fetch("https://ipapi.co/json")
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                    const countryCode = data.country_code.toUpperCase();
+                    const selectCountry = document.getElementById('country_user');
+                    selectCountry.value = countryCode;
+                    const event = new Event('change');
+                    selectCountry.dispatchEvent(event);
+                    success(data.country_code);
+                })
+                .catch(function() { failure(); });
+            }
+    });
+    var nuevoLabel = document.createElement("label");
+    nuevoLabel.setAttribute("for", "tel_user");
+    nuevoLabel.className = "absolute left-12 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm";
+    nuevoLabel.textContent = "Telefono";
+    var divAllowDropdown = document.querySelector(".iti--allow-dropdown");
+    divAllowDropdown.appendChild(nuevoLabel);
+    var elementosITI = document.querySelectorAll(".iti");
+    elementosITI.forEach(function(elemento) {
+        elemento.classList.remove("iti");
+    });
+    function pswCheck(input) {
+        if (input.value !== document.getElementById('password').value) {
+            input.setCustomValidity('Las contraseñas no coinciden');
+        } else {
+            input.setCustomValidity('');
+        }
+    }
+
+    document.getElementById('workspace_user').addEventListener('keydown', function(e) {
+        if (e.key === ' ') {
+            e.preventDefault();
+        }
+    });
+</script>
+<script src="/www_public/scripts/contribue_form.js" ></script>
+<script src="/www_public/scripts/sweetalert2@11.js"></script>
+</body>
+</html>
