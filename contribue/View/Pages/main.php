@@ -61,15 +61,15 @@ if (!$session->isActive && !empty($controller->getPlans())): ?>
                             </li>
                         </ul>
                         <?php if ($session->isNew && !$session->isActive): ?>
-                        <a href="#"
-                           class="mt-auto  text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900 ">
-                            Obtener mes de prueba
-                        </a>
+                            <button data-sbm="true" data-method="POST" data-action="api/subscription/0.0.1/subscriptionTrialService" data-object="payment_plan_id='<?php echo $plan['plan_id']; ?>';amount='<?php echo htmlspecialchars($plan['prices']['MES']); ?>'"
+                                    class="mt-auto  text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900 ">
+                                Obtener mes de prueba
+                            </button>
                         <?php else: ?>
-                            <a href="#"
+                            <button data-sbm="true" data-method="POST" data-action="url" data-object="valoruno='';valordos='';valortres=45"
                                class="mt-auto  text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900 ">
                                 Comprar
-                            </a>
+                            </button>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>

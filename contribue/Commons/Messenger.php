@@ -23,6 +23,10 @@ class Messenger
         return "Swal.fire({title: \"$title\",text: \"$msg\",icon: \"$icon\"});";
     }
 
+    function msgHtmlWithIconAndTimer($title,$msg,$icon){
+        return "let timerInterval;Swal.fire({title: \"$title\",text: \"$msg\",icon: \"$icon\",allowOutsideClick: false,allowEscapeKey: false,allowEnterKey: false,timer: 2000,timerProgressBar: true,  didOpen: () => {Swal.showLoading();}}).then((result)=>{if(result.dismiss===Swal.DismissReason.timer){window.location.reload();}});";
+    }
+
     function msgWithAction($title,$msg,$icon,$confirmText,$denyText,$denyAction,$confirmAction){
         return "Swal.fire({title: \"$title\",text: \"$msg\",icon: \"$icon\",showDenyButton: true,showCancelButton: false,confirmButtonText: \"$confirmText\",confirmButtonColor: \"#06b6d4\", denyButtonText: `$denyText`}).then((result) => {if (result.isConfirmed){ {$confirmAction} }else if (result.isDenied){ {$denyAction}}});";
     }

@@ -209,6 +209,28 @@ class users_rest_api
         echo json_encode($response);
     }
 
+    function GET_logout2(){
+        $useId = $_GET['userId'];
+        $this->db = new DB();
+        $msg = new Messenger();
+        $response = null;
+        try {
+            $this->db->connect();
+            $conditions = array('user_id' => $useId);
+            $result = $this->db->delete('users_validation', $conditions);
+            $response = new ResponseDTO(true, "Se han cerrado las demas sesiones",null,'N',
+                '');
+        }catch (Exception $e){
+            error_log($e->getMessage());
+            $response = new ResponseDTO(false, "Ocurrio un error en el proceso vuelve a intentar",null,'MSG',
+                $msg->msgHtmlWithIcon('Aviso','En este momento presentamos inconvenientes, vuelve a intentar','warning'));
+        } finally {
+            $this->db->disconnect();
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+
     /**
      * @param string $email
      * @return user

@@ -30,7 +30,8 @@ class main_view
                     'plan_name' => $plan['plan_name'],
                     'plan_description' => $plan['plan_description'],
                     'prices' => [],
-                    'features' => $plan['features']
+                    'features' => $plan['features'],
+                    'plan_id' => $plan['plan_id']
                 ];
             }
 

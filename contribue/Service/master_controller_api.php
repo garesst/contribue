@@ -22,7 +22,7 @@ class master_controller_api
     function llamarAPI($endpoint,$metodo,$vFuncion,$funcion)
     {
         $msg = new Messenger();
-        $nombreClase = 'Service\\'.$endpoint.'\\'.$endpoint.'_rest_api';
+        $nombreClase = "Service\\".$endpoint."\\".$endpoint."_rest_api";
 
         if (class_exists($nombreClase)) {
             $reflection = new ReflectionClass($nombreClase);
@@ -45,9 +45,7 @@ class master_controller_api
                 $msg->notEndpoint($endpoint);
             }
         } else {
-            echo $nombreClase;
-            echo $nombreClase;
-            $msg->notEndpoint($endpoint);
+            $msg->notEndpoint($nombreClase);
         }
     }
 

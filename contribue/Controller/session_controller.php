@@ -1,12 +1,15 @@
 <?php
 
 namespace contribue\Controller;
+use DateTime;
+
 include_once('Controller/subscription_controller.php');
 
 class session_controller
 {
     public string $workspace = '';
     public $sub = null;
+
     public bool $isActive = false;
     public bool $isNew = false;
 
@@ -59,7 +62,8 @@ class session_controller
                 }
             }
         } else {
-            $this->isNew = true;
+            $subTrial = $sub->checkTrialSubscription($this->workspace);
+            $this->isNew = $subTrial===0;
         }
     }
 

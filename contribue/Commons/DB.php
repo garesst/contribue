@@ -10,7 +10,7 @@ class DB
     private $db_name;
     private $username;
     private $password;
-    private $conn;
+    public $conn;
 
     // Constructor
     public function __construct() {

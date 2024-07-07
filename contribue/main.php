@@ -92,6 +92,7 @@ $viewPages = 'View/Pages/'.$pathSegments[2].'.php';
         <?php include_once($viewPages);?>
     </div>
 </div>
+<script src="/www_public/scripts/sweetalert2@11.js"></script>
 <script src="/www_public/scripts/contribue_form.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {

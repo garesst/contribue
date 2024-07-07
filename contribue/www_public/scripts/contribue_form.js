@@ -14,7 +14,7 @@ function handleFormSubmit(event) {
     // Validar los componentes (puedes agregar tus validaciones aquí)
     var isValid = true;
     /**
-    if (!formData.nombre || !formData.email) {
+     if (!formData.nombre || !formData.email) {
         isValid = false;
         alert("Por favor, complete todos los campos.");
     }**/
@@ -32,23 +32,23 @@ function handleFormSubmit(event) {
         // Aquí puedes hacer una solicitud a tu API con la URL y los datos del formulario
         console.log("URL:", url);
         console.log("Datos:", jsonData);
-        console.log("Method: "+method);
+        console.log("Method: " + method);
         // Ejemplo de solicitud a la API utilizando fetch
         fetch(fullUrl, {
-          method: method,
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: jsonData
+            method: method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: jsonData
         })
-        .then(response => response.json())
-        .then(data => {
-          console.log("Respuesta de la API:", data);
-            procesarData(data,this);
-        })
-        .catch(error => {
-          console.error("Error al enviar datos a la API:", error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log("Respuesta de la API:", data);
+                procesarData(data, this);
+            })
+            .catch(error => {
+                console.error("Error al enviar datos a la API:", error);
+            });
     }
 }
 
@@ -60,7 +60,7 @@ for (var i = 0; i < forms.length; i++) {
     forms[i].addEventListener("submit", handleFormSubmit);
 }
 
-function procesarData(data,formOrigin) {
+function procesarData(data, formOrigin) {
     if (data && data.action) {
         switch (data.action) {
             case "MSG":
@@ -72,6 +72,8 @@ function procesarData(data,formOrigin) {
                 if (data.execute) {
                     window.location.href = data.execute;
                 }
+                break;
+            case "N":
                 break;
             default:
                 break;
@@ -109,8 +111,8 @@ async function consumirREST(url, metodo, datos, token) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            ...(metodo === 'GET' && datos && { body: JSON.stringify(datos) }),
-            ...(metodo !== 'GET' && datos && { body: JSON.stringify(datos) })
+            ...(metodo === 'GET' && datos && {body: JSON.stringify(datos)}),
+            ...(metodo !== 'GET' && datos && {body: JSON.stringify(datos)})
         };
 
         const respuesta = await fetch(url, opciones);
@@ -143,27 +145,127 @@ function obtenerDataUsr(nombreCampo) {
     }
 }
 
-function cerrarTodasSesiones(useID){
-    const url = 'contribue/api/users/0.0.1/logout/?userId='+useID;
+function cerrarSesiones(useID) {
+    const url = 'api/users/0.0.1/logout2/?userId=' + useID;
     const metodo = 'GET';
     //const datos = { parametro1: 'valor1', parametro2: 'valor2' };
 
     consumirREST(url, metodo, null, '')
         .then(respuesta => {
-            procesarData(respuesta,null);
+            procesarData(respuesta, null);
         })
         .catch(error => {
             console.error('Error:', error);
         });
 }
 
-function validarSesionLogin(){
+function cerrarTodasSesiones(useID) {
+    const url = 'contribue/api/users/0.0.1/logout/?userId=' + useID;
+    const metodo = 'GET';
+    //const datos = { parametro1: 'valor1', parametro2: 'valor2' };
+
+    consumirREST(url, metodo, null, '')
+        .then(respuesta => {
+            procesarData(respuesta, null);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+function cerrarSesion(){
+    cerrarSesiones(obtenerDataUsr('user_id'));
+    localStorage.clear();
+    sessionStorage.clear();
+    clearCookies();
+    window.location.replace("/");
+}
+
+function clearCookies() {
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    }
+}
+
+function validarSesionLogin() {
     //
-    if(tokenExp){
-        if(checkCookie('jwt')){
+    if (tokenExp) {
+        if (checkCookie('jwt')) {
             window.location.replace("/contribue/main");
-        }else{
+        } else {
+            if(localStorage.getItem('jwt')!=null)
             document.cookie = "jwt=" + localStorage.getItem('jwt') + ";expires=" + localStorage.getItem('exp') + ";path=/";
         }
     }
 }
+
+// Función para convertir el string de data-object a un objeto JavaScript
+function parseDataObject(dataObject) {
+    const obj = {};
+    const pairs = dataObject.split(';');
+    pairs.forEach(pair => {
+        const [key, value] = pair.split('=');
+        obj[key.trim()] = value.trim().replace(/'/g, '');
+    });
+    return obj;
+}
+
+// Buscar todos los botones que cumplan los criterios
+document.querySelectorAll('button[data-sbm="true"]').forEach(button => {
+    const metodo = button.getAttribute('data-method');
+    const url = button.getAttribute('data-action');
+    const dataObject = button.getAttribute('data-object');
+
+    if (metodo && url && dataObject) {
+        const datos = parseDataObject(dataObject);
+
+        button.addEventListener('click', async () => {
+            loadSpinner();
+            try {
+
+                const resultado = await consumirREST(url, metodo, datos).then(respuesta => {
+                    procesarData(respuesta, null);
+                })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                ;
+                console.log('Resultado:', resultado);
+            } catch (error) {
+                console.error('Error al consumir la API:', error);
+            }
+        });
+    }
+});
+
+function loadSpinner() {
+    Swal.fire({
+        width: '550px',
+        html: `
+        <div class="bg-transparent flex flex-col items-center justify-center gap-4">
+            <img class="w-20" src="/www_public/img/Ghost.gif" alt="Loading gif">
+            
+            <strong>Espera, por favor</strong>
+        </div>
+    `,
+        color: '#014766',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
+            Swal.getActions().style.display = 'none'; // Hide the action bar as it's not needed
+        },
+    });
+}
+
+function redirectTo(path){
+    window.location.replace(path);
+}
+
